@@ -1,0 +1,21 @@
+<div>
+<label>First selected  </label><span>{{Sel1}}</span><br/>
+<label>Move Count  </label><span>{{MoveCount}}</span>
+<table border=1>
+<tr><th colspan=3>{{title}}</th></tr>
+<tr>
+
+<td>
+<table>
+<tr ng-repeat = "x in towers[0]" ><td ><span ng-click="ProcessClick(0)"><center>{{x}}</center></span></td></tr>
+</table>
+</td>
+<td><table>
+<tr ng-repeat = "x in towers[1]" ><td ><span ng-click="ProcessClick(1)"><center>{{x}}</center></span></td></tr>
+</table></td>
+<td><table>
+<tr ng-repeat = "x in towers[2]" ><td ><span ng-click="ProcessClick(2)"><center>{{x}}</center></span></td></tr>
+</table></td>
+</tr>
+</table>
+</div>

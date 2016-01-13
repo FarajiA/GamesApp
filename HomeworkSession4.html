@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Session 4 Homework</title>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type='text/javascript'>
+angular.module('TaxPay', []);
+
+angular.module('TaxPay').controller('TaxPayCtrl', TaxPayCtrl);
+TaxPayCtrl.$inject=[];
+function TaxPayCtrl(){
+	var vm = this;
+	vm.TaxPayer={};
+	vm.TaxPayer.fname="";
+	vm.TaxPayer.lname="";
+	vm.TaxPayer.maiden="";
+	vm.TaxPayer.email="";
+	vm.TaxPayer.ssn="";
+	vm.TaxPayer.ccard="";
+	vm.TaxPayer.accountnum="";
+	vm.TaxPayer.ExpirationDateList=['2016', '2017', '2018', '2019', '2020'];
+	//vm.TaxPayer.Levels=["Local", "State", "Federal"];
+	vm.TaxPayer.Levels={};
+	vm.TaxPayer.Levels.LocalSelected=false;
+	vm.TaxPayer.Levels.StateSelected=false;
+	vm.TaxPayer.Levels.FederalSelected=false;
+	
+	vm.TaxPayer.ExpirationDateSelected=vm.TaxPayer.ExpirationDateList[0];
+	vm.TaxPayer.accType=['Checking', 'Savings', 'Business'];
+	vm.TaxPayer.accTypeSelected={};
+	//vm.ErrorStatus={};
+	//vm.ErrorStatus=vm.TaxPayer.fname.$dirty && vm.TaxPayer.fname.$invalid;
+	//console.log(vm.ErrorStatus);
+	vm.ProcessForm=function(){console.log("Math is fun.");alert("Processing form.");}
+	vm.RadioChange=function(){alert("Account Type Selected:  "+vm.TaxPayer.accTypeSelected);}
+	vm.CheckBoxChange=function(){alert("Tax Level Selected: Local- "+vm.TaxPayer.Levels.LocalSelected+" State- "+ vm.TaxPayer.Levels.StateSelected+" Federal-" + vm.TaxPayer.Levels.FederalSelected);}
+	
+}
+
+</script>
+</head>
+
+<!--
+<span ng-show="PII.lname.$error">{{PII.fname.$error}}</span><br/>
+-->
+<body ng-app="TaxPay" ng-controller="TaxPayCtrl as vm">
+<form name='PII' novalidate=novalidate>
+<fieldset>
+<div>Tax Information</div><br/>
+<div ng-bind="PII.vm.TaxPayer.fname.$invalid"></div>
+	First Name: <input type="text" ng-pattern="/\w+?/" ng-maxlength="20" ng-required="true" ng-model='vm.TaxPayer.fname' name="fname"></input><br/> 
+	
+		<span style="color:red" ng-show="PII.fname.$invalid"> 
+		<span ng-show="PII.fname.$error.required">Firstname is required.<br/></span>
+		<span ng-show="PII.fname.$error.maxlength">Firstname must not exceed 20 characters.<br/></span>
+		<span ng-show="PII.fname.$error.pattern">Pattern mismatch.<br/></span>
+		</span> 
+	Last Name: <input type="text" ng-pattern="/\w+?/" ng-maxlength="20" ng-required="true" ng-model='vm.TaxPayer.lname' name="lname"></input><br/>
+			<span style="color:red" ng-show="PII.lname.$invalid"> 
+		<span ng-show="PII.lname.$error.required">Lastname is required.<br/></span>
+		<span ng-show="PII.lname.$error.maxlength">Lastname must not exceed 20 characters.<br/></span>
+		</span> 
+
+	Mother's Maiden Name: <input ng-pattern="/\w+?/" ng-maxlength="20" type="text" ng-model='vm.TaxPayer.maiden'></input><br/>
+	Email: <input type="text" ng-pattern="/\w+?@\.\w+?/" ng-maxlength="20" ng-model='vm.TaxPayer.email'></input><br/>
+	SSN: <input name="ssn" type="text" ng-required="true"  ng-pattern="/\d{3}\-\d{2}\-\d{4}/" ng-model='vm.TaxPayer.ssn'></input><br/>
+	<span style="color:red" ng-show="PII.ssn.$invalid"> 
+		<span ng-show="PII.ssn.$error.required">SSN is required.</span><br/>
+		<span ng-show="PII.ssn.$error.pattern">SSN must be in form xxx-xx-xxxx</span><br/>
+		</span> 
+	
+	Credit Card Number: <input type="text" ng-model='vm.TaxPayer.ccard'></input><br/>
+	Account Number: <input type="text" ng-model='vm.TaxPayer.accountnum'></input><br/>
+	Account Type: <label ng-repeat="x in vm.TaxPayer.accType">{{x}}<input type="radio" ng-value="x" ng-model="vm.TaxPayer.accTypeSelected" ng-change="vm.RadioChange()"></input> </label><br/>
+	Tax Level To Be Paid: <label >
+		Local<input type="checkbox" ng-change="vm.CheckBoxChange()" ng-model="vm.TaxPayer.Levels.LocalSelected"></input>
+		State<input type="checkbox" ng-change="vm.CheckBoxChange()" ng-model="vm.TaxPayer.Levels.StateSelected"></input>
+		Federal<input type="checkbox" ng-change="vm.CheckBoxChange()" ng-model="vm.TaxPayer.Levels.FederalSelected"></input>
+	</label><br/>
+	Expiration Date: <select  ng-model="vm.TaxPayer.ExpirationDateSelected">
+		<!-- <option value="" ng-selected="true">--Select One--</option> -->
+		 <option ng-repeat="x in vm.TaxPayer.ExpirationDateList" value="{{x}}">{{x}}</option>
+	</select>
+	<input type="button" value="Submit Form" ng-click ="vm.ProcessForm()"/>
+</fieldset>
+</form>
+
+
+</body>
+</html>

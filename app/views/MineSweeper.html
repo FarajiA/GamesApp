@@ -1,0 +1,14 @@
+<div>
+
+<table border=1>
+<tr><th colspan='20'>{{title}}Safe Spaces Found:{{SpacesFound}} </th>
+</tr>
+<tr ng-repeat ="x in HeightRange" >
+	<td ng-repeat ="y in WidthRange" >
+		<ms-cell data='Grid[x][y]' left-click='leftClick()'>
+		</ms-cell>
+	</td>
+</tr>
+</table>
+
+</div>

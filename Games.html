@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="app/Vendor/angular-ui-router.min.js"></script>
+<script src="app/app.js"></script>
+<script src="app/services/MineSweeperSvc.js"></script>
+<script src="app/services/ConfigSvc.js"></script>
+<script src="app/controllers/HanoiTowersCtrl.js"></script>
+<script src="app/controllers/MineSweeperCtrl.js"></script>
+<script src="app/controllers/HanoiConfigCtrl.js"></script>
+<script src="app/controllers/MineSweeperConfigCtrl.js"></script>
+<script src="app/directives/MSCell.js"></script>
+<script type='text/javascript'>alert('Do you want to play a game?');</script>
+</head>
+<body ng-app="GameApp">
+
+<table>
+<tr><th>Game List</th></tr>
+<tr><td><a ui-sref='HanoiTowers'>1. Tower of Hanoi</a></td></tr>
+<tr><td><a ui-sref='MineSweeper'>2. MineSweeper</a></td></tr>
+<tr><td><a ui-sref='NuclearWar'>3. Global Thermonuclear War</a></td></tr>
+</table>
+<br/><br/>
+<ui-view></ui-view>
+
+</body>
+
+</html>
