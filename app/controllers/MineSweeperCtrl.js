@@ -6,13 +6,21 @@
 		//var vm=this;
 		//var svc=MineSweeperSvc;
 		$scope.title="MineSweeper!";
-		$scope.tmpCell=MineSweeperSvc.MSGrid[0][0];
-		$scope.Grid=MineSweeperSvc.MSGrid;
-		$scope.leftClick=leftClick;
+
+	    MineSweeperSvc.configMineSettings().then(function(config) {
+
+	        $scope.tmpCell = config.MSGrid[0][0];
+	        $scope.Grid = config.MSGrid;
+	        $scope.SpacesFound = config.SafeSpacesFound;
+	        $scope.HeightRange = config.HeightRange;
+	        $scope.WidthRange = config.WidthRange;
+	        $scope.leftClick = leftClick(config.GridSize, config.NumberOfBombs);
+
+
+	    });
+
+
 		$scope.TestFunc=TestFunc;
-		$scope.SpacesFound = MineSweeperSvc.SafeSpacesFound;
-		$scope.HeightRange=MineSweeperSvc.HeightRange;
-		$scope.WidthRange=MineSweeperSvc.WidthRange;
 		
 		console.log($scope.HeightRange);
 		console.log($scope.WidthRange);
@@ -22,14 +30,13 @@
 			
 		}
 		
-		function leftClick(){
+		function leftClick(gridSize, numberOfBombs) {
+            /*
 			MineSweeperSvc.SafeSpacesFound=MineSweeperSvc.SafeSpacesFound+1;
 			$scope.SpacesFound = MineSweeperSvc.SafeSpacesFound;
-			if($scope.SpacesFound==(MineSweeperSvc.GridSize-MineSweeperSvc.NumberOfBombs)){
-					alert("You win!");
-				
-			}
-			
+            */
+		    if(($scope.SpacesFound + 1) == (gridSize - numberOfBombs ))
+		            alert("You win!");
 		}
 		
 		

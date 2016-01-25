@@ -43,5 +43,34 @@ function ConfigSvc(){
 	
 }
 
+angular.module('GameApp').factory('ConfigMineSweeperSvc', ConfigMineSweeperSvc);
+ConfigMineSweeperSvc.$inject = ['$q'];
+function ConfigMineSweeperSvc($q) {
+    var svc = {};
+    var Config = {};
+
+    Config.ConfigMS = function (MSFormConfig) {
+        var deffered = $q.defer();
+        if (MSFormConfig.width) {
+            console.log('editing width');
+            svc.width = MSFormConfig.width;
+        }
+        if (MSFormConfig.height) {
+            svc.height = MSFormConfig.height;
+            console.log('editing height');
+        }
+        if (MSFormConfig.bombs) {
+            console.log('editing bombs');
+            svc.bombs = MSFormConfig.bombs;
+        }
+        deffered.resolve(svc);
+        return deffered.promise;
+    };
+
+    Config.data = function() { return svc; };
+    return Config;
+
+}
+
 
 })();
